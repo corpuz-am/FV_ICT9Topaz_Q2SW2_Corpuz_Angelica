@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Travel Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("light.png");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h2 {
+            background-color: #6a73809d;
+            color: white;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 30px;
+            text-align: center;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding: 15px;
+        }
+        
+        h3 {
+            color: white;
+            font-size: 30px;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding: 5px;
+        }
+        
+        header {
+            background-color: #c1c9d4;
+            padding: 1px;
+            text-align: center;
+            font-size: 35px;
+            font-weight: 300;
+            font-family: 'Dancing Script', cursive;
+            color: #444c58;
+        }
+        
+        article {
+            -webkit-flex: 3;
+            -ms-flex: 3;
+            flex: 3;
+        }
+        
+        table,
+        th,
+        td {
+            border: 3px solid white;
+            border-collapse: collapse;
+            font-size: 20px;
+            font-family: 'DM Sans', sans-serif;
+            margin: 20px;
+        }
+        
+        footer {
+            background-color: #596475;
+            padding: 12px;
+            text-align: left;
+            font-size: 23px;
+            font-family: 'DM Sans';
+        }
+        
+        .topnav {
+            overflow: hidden;
+            background-color: #596475;
+            font-size: 20px;
+        }
+        
+        .topnav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        .topnav a:hover {
+            background-color: #858f9e;
+            color: #596475;
+        }
+        
+        .topnav a.active {
+            background-color: #6a7380;
+            color: #1b1e24;
+        }
+        
+        form {
+            max-width: 1350px;
+            margin: 20px auto;
+        }
+        
+        .feedback-input {
+            font-family: 'DM Sans';
+            color: #444c58;
+            font-weight: 500;
+            font-size: 18px;
+            border-radius: 5px;
+            line-height: 22px;
+            background-color: #ffffff;
+            border: 4px solid #97a9c4;
+            transition: all 0.3s;
+            padding: 13px;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            outline: 0;
+        }
+        
+        .feedback-input:focus {
+            border: 4px solid #2d3644;
+        }
+        
+        textarea {
+            height: 150px;
+            line-height: 150%;
+            resize: vertical;
+            font-family: 'DM Sans';
+        }
+        
+        [type="submit"] {
+            font-family: 'DM Sans';
+            width: 100%;
+            background: #959faf;
+            border-radius: 5px;
+            border: 0;
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            transition: all 0.3s;
+            margin-top: -4px;
+            font-weight: 700;
+        }
+        
+        [type="submit"]:hover {
+            background: #282d35;
+            color: white
+        }
+        
+        .bird {
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells.svg);
+            background-size: auto 100%;
+            width: 88px;
+            height: 125px;
+            will-change: background-position;
+            -webkit-animation-name: fly-cycle;
+            animation-name: fly-cycle;
+            -webkit-animation-timing-function: steps(10);
+            animation-timing-function: steps(10);
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+        }
+        
+        .bird--one {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-delay: -0.5s;
+            animation-delay: -0.5s;
+        }
+        
+        .bird--two {
+            -webkit-animation-duration: 0.9s;
+            animation-duration: 0.9s;
+            -webkit-animation-delay: -0.75s;
+            animation-delay: -0.75s;
+        }
+        
+        .bird--three {
+            -webkit-animation-duration: 1.25s;
+            animation-duration: 1.25s;
+            -webkit-animation-delay: -0.25s;
+            animation-delay: -0.25s;
+        }
+        
+        .bird--four {
+            -webkit-animation-duration: 1.1s;
+            animation-duration: 1.1s;
+            -webkit-animation-delay: -0.5s;
+            animation-delay: -0.5s;
+        }
+        
+        .bird-container {
+            position: absolute;
+            top: 5%;
+            left: -10%;
+            -webkit-transform: scale(0) translateX(-10vw);
+            transform: scale(0) translateX(-10vw);
+            will-change: transform;
+            -webkit-animation-name: fly-right-one;
+            animation-name: fly-right-one;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+        }
+        
+        .bird-container--one {
+            -webkit-animation-duration: 15s;
+            animation-duration: 15s;
+            -webkit-animation-delay: 0;
+            animation-delay: 0;
+        }
+        
+        .bird-container--two {
+            -webkit-animation-duration: 16s;
+            animation-duration: 16s;
+            -webkit-animation-delay: 1s;
+            animation-delay: 1s;
+        }
+        
+        .bird-container--three {
+            -webkit-animation-duration: 14.6s;
+            animation-duration: 14.6s;
+            -webkit-animation-delay: 9.5s;
+            animation-delay: 9.5s;
+        }
+        
+        .bird-container--four {
+            -webkit-animation-duration: 16s;
+            animation-duration: 16s;
+            -webkit-animation-delay: 10.25s;
+            animation-delay: 10.25s;
+        }
+        
+        @-webkit-keyframes fly-cycle {
+            100% {
+                background-position: -900px 0;
+            }
+        }
+        
+        @keyframes fly-cycle {
+            100% {
+                background-position: -900px 0;
+            }
+        }
+        
+        @-webkit-keyframes fly-right-one {
+            0% {
+                -webkit-transform: scale(0.3) translateX(-10vw);
+                transform: scale(0.3) translateX(-10vw);
+            }
+            10% {
+                -webkit-transform: translateY(2vh) translateX(10vw) scale(0.4);
+                transform: translateY(2vh) translateX(10vw) scale(0.4);
+            }
+            20% {
+                -webkit-transform: translateY(0vh) translateX(30vw) scale(0.5);
+                transform: translateY(0vh) translateX(30vw) scale(0.5);
+            }
+            30% {
+                -webkit-transform: translateY(4vh) translateX(50vw) scale(0.6);
+                transform: translateY(4vh) translateX(50vw) scale(0.6);
+            }
+            40% {
+                -webkit-transform: translateY(2vh) translateX(70vw) scale(0.6);
+                transform: translateY(2vh) translateX(70vw) scale(0.6);
+            }
+            50% {
+                -webkit-transform: translateY(0vh) translateX(90vw) scale(0.6);
+                transform: translateY(0vh) translateX(90vw) scale(0.6);
+            }
+            60% {
+                -webkit-transform: translateY(0vh) translateX(110vw) scale(0.6);
+                transform: translateY(0vh) translateX(110vw) scale(0.6);
+            }
+            100% {
+                -webkit-transform: translateY(0vh) translateX(110vw) scale(0.6);
+                transform: translateY(0vh) translateX(110vw) scale(0.6);
+            }
+        }
+        
+        @keyframes fly-right-one {
+            0% {
+                -webkit-transform: scale(0.3) translateX(-10vw);
+                transform: scale(0.3) translateX(-10vw);
+            }
+            10% {
+                -webkit-transform: translateY(2vh) translateX(10vw) scale(0.4);
+                transform: translateY(2vh) translateX(10vw) scale(0.4);
+            }
+            20% {
+                -webkit-transform: translateY(0vh) translateX(30vw) scale(0.5);
+                transform: translateY(0vh) translateX(30vw) scale(0.5);
+            }
+            30% {
+                -webkit-transform: translateY(4vh) translateX(50vw) scale(0.6);
+                transform: translateY(4vh) translateX(50vw) scale(0.6);
+            }
+            40% {
+                -webkit-transform: translateY(2vh) translateX(70vw) scale(0.6);
+                transform: translateY(2vh) translateX(70vw) scale(0.6);
+            }
+            50% {
+                -webkit-transform: translateY(0vh) translateX(90vw) scale(0.6);
+                transform: translateY(0vh) translateX(90vw) scale(0.6);
+            }
+            60% {
+                -webkit-transform: translateY(0vh) translateX(110vw) scale(0.6);
+                transform: translateY(0vh) translateX(110vw) scale(0.6);
+            }
+            100% {
+                -webkit-transform: translateY(0vh) translateX(110vw) scale(0.6);
+                transform: translateY(0vh) translateX(110vw) scale(0.6);
+            }
+        }
+        
+        @-webkit-keyframes fly-right-two {
+            0% {
+                -webkit-transform: translateY(-2vh) translateX(-10vw) scale(0.5);
+                transform: translateY(-2vh) translateX(-10vw) scale(0.5);
+            }
+            10% {
+                -webkit-transform: translateY(0vh) translateX(10vw) scale(0.4);
+                transform: translateY(0vh) translateX(10vw) scale(0.4);
+            }
+            20% {
+                -webkit-transform: translateY(-4vh) translateX(30vw) scale(0.6);
+                transform: translateY(-4vh) translateX(30vw) scale(0.6);
+            }
+            30% {
+                -webkit-transform: translateY(1vh) translateX(50vw) scale(0.45);
+                transform: translateY(1vh) translateX(50vw) scale(0.45);
+            }
+            40% {
+                -webkit-transform: translateY(-2.5vh) translateX(70vw) scale(0.5);
+                transform: translateY(-2.5vh) translateX(70vw) scale(0.5);
+            }
+            50% {
+                -webkit-transform: translateY(0vh) translateX(90vw) scale(0.45);
+                transform: translateY(0vh) translateX(90vw) scale(0.45);
+            }
+            51% {
+                -webkit-transform: translateY(0vh) translateX(110vw) scale(0.45);
+                transform: translateY(0vh) translateX(110vw) scale(0.45);
+            }
+            100% {
+                -webkit-transform: translateY(0vh) translateX(110vw) scale(0.45);
+                transform: translateY(0vh) translateX(110vw) scale(0.45);
+            }
+        }
+        
+        @keyframes fly-right-two {
+            0% {
+                -webkit-transform: translateY(-2vh) translateX(-10vw) scale(0.5);
+                transform: translateY(-2vh) translateX(-10vw) scale(0.5);
+            }
+            10% {
+                -webkit-transform: translateY(0vh) translateX(10vw) scale(0.4);
+                transform: translateY(0vh) translateX(10vw) scale(0.4);
+            }
+            20% {
+                -webkit-transform: translateY(-4vh) translateX(30vw) scale(0.6);
+                transform: translateY(-4vh) translateX(30vw) scale(0.6);
+            }
+            30% {
+                -webkit-transform: translateY(1vh) translateX(50vw) scale(0.45);
+                transform: translateY(1vh) translateX(50vw) scale(0.45);
+            }
+            40% {
+                -webkit-transform: translateY(-2.5vh) translateX(70vw) scale(0.5);
+                transform: translateY(-2.5vh) translateX(70vw) scale(0.5);
+            }
+            50% {
+                -webkit-transform: translateY(0vh) translateX(90vw) scale(0.45);
+                transform: translateY(0vh) translateX(90vw) scale(0.45);
+            }
+            51% {
+                -webkit-transform: translateY(0vh) translateX(110vw) scale(0.45);
+                transform: translateY(0vh) translateX(110vw) scale(0.45);
+            }
+            100% {
+                -webkit-transform: translateY(0vh) translateX(110vw) scale(0.45);
+                transform: translateY(0vh) translateX(110vw) scale(0.45);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Travel to Basco, Batanes</h1>
+    </header>
+
+    <div class="container">
+        <div class="bird-container bird-container--one">
+            <div class="bird bird--one"></div>
+        </div>
+        <div class="bird-container bird-container--two">
+            <div class="bird bird--two"></div>
+        </div>
+
+        <div class="bird-container bird-container--three">
+            <div class="bird bird--three"></div>
+        </div>
+
+        <div class="bird-container bird-container--four">
+            <div class="bird bird--four"></div>
+        </div>
+    </div>
+
+    <div class="topnav">
+        <a href="FV_ICT9Topaz_Q2SW2_Corpuz_Angelica.html">Introduction</a>
+        <a href="FV_ICT9Topaz_Q2SW2_Corpuz_Angelica1.html">Preparation</a>
+        <a class="active" href="FV_ICT9Topaz_Q2SW2_Corpuz_Angelica2.html">Itinerary</a>
+        <a href="FV_ICT9Topaz_Q2SW2_Corpuz_Angelica3.html">Tips</a>
+        <a href="FV_ICT9Topaz_Q2SW2_Corpuz_Angelica4.html">Resources</a>
+    </div>
+
+    <article>
+        <h2>Itinerary</h2>
+        <center>
+            <table cellpadding="10" width: 100%;>
+                <tr style="background-color: #c1c9d4b2; color:#1b1e24">
+                    <th><i>Visual Representation</i></th>
+                    <th><i>Days and Activities</i></th>
+                </tr>
+                <tr style="background-color: #3f4650c5">
+                    <td style="width:30%">
+                        <center><img src="Day1.png" alt="Day1" height="350px"></center>
+                    </td>
+                    <td>
+                        Day 1:
+                        <ol>
+                            <li>Have Coffee at Phil's Brew; Located at Amboy Cor Argonza Sts, Basco, Luzon Philippines</li>
+                            <li>Visit and Have a Relaxing Stroll at the Beautiful Valugan Boulder Beach</li>
+                            <li>Have Lunch at the Italian Restaurant Called Casa Napoli; Located at Brgy. Chanarian, Basco, Luzon 3900 Philippines</li>
+                            <li>Visit the Tukon Chapel which is known for it's Peaceful Ambiance and Beautiful Stones</li>
+                            <li>Have Dinner at Vunong Dinette which is known for their Native Cuisine giving you a Authentic Experience</li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr style="background-color: #5c6b80ab">
+                    <td style="width:30%">
+                        <center><img src="Day2.png" alt="Day2" height="350px"></center>
+                    </td>
+                    <td>
+                        Day 2:
+                        <ol>
+                            <li>Have Breakfast at Beehan's Meals & Snack known for their Extensive choices of Ivatan food</li>
+                            <li>Visit the Basco Lighthouse at Naidi Hills which is a perfect spot for Sunset Viewing</li>
+                            <li>Have Lunch at Cafe du Tukon; Located at Tulan Sitio Tukon Chanarian, Tukon, Basco, Luzon Philippines</li>
+                            <li>Visit the Dipnaysuhuan Japanese Tunnel which is known for to be filled with history as it served as a shelter for Japanese soldiers when they arrived in Batanes in 1941</li>
+                            <li>Have Dinner at Yaru Art Gallery & Fip Cafe which is known for their Great Food accompanied with an even better view</li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr style="background-color: #a6b1c28f">
+                    <td style="width:30%">
+                        <center><img src="Day3.png" alt="Day3" height="350px"></center>
+                    </td>
+                    <td>
+                        Day 3:
+                        <ol>
+                            <li>Have Breakfast at Hiro's Cafe; Located at Abad Cor. La Fuente Sts, Basco, Luzon 3900 Philippines</li>
+                            <li>Visit Basco Rolling Hills which is known for its Picturesque hills with views & animals</li>
+                            <li>Have Lunch at Jino’s East Pizzaria that features delicious and great homemade pizzas</li>
+                            <li>Relax and Unwind while you visit the Chawa View Deck known for its amazing view of the mountains and sea</li>
+                            <li>Have Dinner at Pension Ivatan that offers delectable and mouth-watering Ivatan cuisines and other Filipino favorites.</li>
+                        </ol>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </article>
+    <footer>
+        <h3>What are your thoughts? Comment Now!</h3>
+        <form>
+            <input name="name" type="text" class="feedback-input" placeholder="Name" />
+            <input name="email" type="text" class="feedback-input" placeholder="Email" />
+            <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
+            <input type="submit" value="SUBMIT" />
+        </form>
+    </footer>
+</body>
+
+</html>
